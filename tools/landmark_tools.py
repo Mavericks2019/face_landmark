@@ -20,7 +20,7 @@ def read_points(file_name=None):
 
 def draw_landmark_point(image, points):
     """
-    Draw landmark point on image.
+    Draw and show landmark point of the image.
     """
     for point in points:
         cv2.circle(image, (int(point[0]), int(
