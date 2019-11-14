@@ -10,7 +10,7 @@ class Model:
         #  input layer
         inputs = tf.cast(input_tensor, tf.float32)
 
-        #  layer1
+        #  layer 1
         with tf.variable_scope('layer1'):
             conv1 = tf.layers.conv2d(
                 inputs=inputs,
@@ -26,7 +26,7 @@ class Model:
                 strides=(2, 2),
                 padding='valid')
 
-        #  layer2
+        #  layer 2
         with tf.variable_scope('layer2'):
             conv2 = tf.layers.conv2d(
                 inputs=pool1,
@@ -50,7 +50,7 @@ class Model:
                 strides=(2, 2),
                 padding='valid')
 
-        #  layer3
+        #  layer 3
         with tf.variable_scope('layer3'):
             conv4 = tf.layers.conv2d(
                 inputs=pool2,
@@ -74,7 +74,7 @@ class Model:
                 strides=(2, 2),
                 padding='valid')
 
-        #  layer4
+        #  layer 4
         with tf.variable_scope('layer4'):
             conv6 = tf.layers.conv2d(
                 inputs=pool3,
@@ -98,9 +98,8 @@ class Model:
                 strides=(1, 1),
                 padding='valid')
 
-        #  layer5
+        #  layer 5
         with tf.variable_scope('layer5'):
-            # Convolutional layer
             conv8 = tf.layers.conv2d(
                 inputs=pool4,
                 filters=256,
@@ -109,19 +108,16 @@ class Model:
                 padding='valid',
                 activation=tf.nn.relu)
 
-        #  Layer6
+        #  Layer 6
         with tf.variable_scope('layer6'):
-            # Flatten tensor into a batch of vectors
             flatten = tf.layers.flatten(inputs=conv8)
 
-            #  fully connected layer.
             dense1 = tf.layers.dense(
                 inputs=flatten,
                 units=1024,
                 activation=tf.nn.relu,
                 use_bias=True)
 
-            # Dense layer 2, also known as the output layer.
             logits = tf.layers.dense(
                 inputs=dense1,
                 units=self.output_size,

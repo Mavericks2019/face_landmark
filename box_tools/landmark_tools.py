@@ -30,6 +30,6 @@ def draw_landmark_point(image, points):
 
 
 if __name__ == '__main__':
-    points_read = read_points("E:\\BaiduNetdiskDownload\\300VW_Dataset_2015_12_14\\001\\annot\\000001.pts")
-    image_read = cv2.imread("E:\\BaiduNetdiskDownload\\300VW_Dataset_2015_12_14\\001\\image\\1.jpg")
+    points_read = read_points("E:\\BaiduNetdiskDownload\\300 Face in Wild dataset\\02_Outdoor\\outdoor_001.pts")
+    image_read = cv2.imread("E:\\BaiduNetdiskDownload\\300 Face in Wild dataset\\02_Outdoor\\outdoor_001.png")
     draw_landmark_point(image_read, points_read)

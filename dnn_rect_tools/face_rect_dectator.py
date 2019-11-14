@@ -1,10 +1,12 @@
+import os
 import cv2
 from cv2 import dnn
 
 WIDTH = 300
 HEIGHT = 300
-PROTOTXT = 'networks\\deploy.prototxt'
-MODEL = 'networks\\res10_300x300_ssd_iter_140000.caffemodel'
+PROTOTXT = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), "networks"), "deploy.prototxt")
+MODEL = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), "networks"),
+                     "res10_300x300_ssd_iter_140000.caffemodel")
 
 NET = dnn.readNetFromCaffe(PROTOTXT, MODEL)
 
