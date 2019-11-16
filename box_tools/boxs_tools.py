@@ -1,3 +1,4 @@
+import json
 import cv2
 from box_tools.landmark_tools import read_points
 from dnn_rect_tools.face_rect_dectator import get_facebox
@@ -262,8 +263,24 @@ def show_points_and_sqr(image, box, points):
     cv2.waitKey(0)
 
 
+def show_points_on_cut_images(image, box, points):
+    x1 = box[0]
+    y1 = box[1]
+    for point in points:
+        cv2.circle(image, (int(point[0] - x1), int(
+            point[1] - y1)), 3, (0, 255, 0), -1, cv2.LINE_AA)
+    cv2.imshow("result", image)
+    cv2.waitKey(0)
+
+
+def read_boxs(json_path):
+    with open(json_path) as f:
+        info = json.load(f)
+    return info["box"]
+
+
 if __name__ == '__main__':
-    image1 = cv2.imread("E:\\BaiduNetdiskDownload\\300VW_Dataset_2015_12_14\\01_Indoor\\indoor_001.png")
-    points1 = read_points("E:\\BaiduNetdiskDownload\\300VW_Dataset_2015_12_14\\01_Indoor\\indoor_001.pts")
-    box1 = get_valid_box(image1, points1)
-    show_points_and_sqr(image1, box1, points1)
+    image1 = cv2.imread("E:\\BaiduNetdiskDownload\\300VW_Dataset_2015_12_14\\519\\images\\519_000004_cut.jpg")
+    points1 = read_points("E:\\BaiduNetdiskDownload\\300VW_Dataset_2015_12_14\\519\\images\\519_000004.pts")
+    box1 = read_boxs("E:\\BaiduNetdiskDownload\\300VW_Dataset_2015_12_14\\519\\images\\519_000004.json")
+    show_points_on_cut_images(image1, box1, points1)
